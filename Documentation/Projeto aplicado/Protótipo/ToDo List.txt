@@ -1,0 +1,10 @@
+pagina de login
+
+landing page
+
+Novo pedido
+
+dashboard com as 3+ tabelas
+
+estoque com configuração de itens
+

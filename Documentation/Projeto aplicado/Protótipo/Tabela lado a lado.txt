@@ -1,0 +1,212 @@
+Claro! Vamos adicionar mais uma tabela abaixo da tabela de informações, que pode conter dados adicionais, como uma lista de projetos ou atividades relacionadas a cada pessoa.
+
+Exemplo Completo com Tabela Adicional
+Aqui está o código atualizado com a nova tabela abaixo da tabela de informações:
+
+html
+Copiar código
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela com Informações Lado a Lado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            display: flex;
+        }
+        .table-container {
+            max-width: 600px;
+            margin-right: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .info-container {
+            max-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        h3 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="table-container">
+    <h2>Tabela de Dados</h2>
+    <table id="myTable">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Idade</th>
+        </tr>
+        <tr data-id="1">
+            <td>1</td>
+            <td>João</td>
+            <td>30</td>
+        </tr>
+        <tr data-id="2">
+            <td>2</td>
+            <td>Maria</td>
+            <td>25</td>
+        </tr>
+        <tr data-id="3">
+            <td>3</td>
+            <td>Carlos</td>
+            <td>35</td>
+        </tr>
+    </table>
+</div>
+
+<div class="info-container">
+    <h3>Detalhes</h3>
+    <table id="infoTable">
+        <tr>
+            <th>Informação</th>
+            <th>Valor</th>
+        </tr>
+        <tr>
+            <td colspan="2" id="noData">Selecione uma linha para ver os detalhes.</td>
+        </tr>
+    </table>
+
+    <h3>Projetos/Atividades</h3>
+    <table id="projectsTable">
+        <tr>
+            <th>Projeto</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td colspan="2" id="noProjects">Selecione uma linha para ver os projetos.</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    const rows = document.querySelectorAll('#myTable tr[data-id]');
+    const infoTable = document.getElementById('infoTable');
+    const noData = document.getElementById('noData');
+    const projectsTable = document.getElementById('projectsTable');
+    const noProjects = document.getElementById('noProjects');
+
+    // Dados de exemplo para a tabela de informações
+    const infoData = {
+        1: {
+            email: 'joao@example.com',
+            endereco: 'Rua A, 123',
+            telefone: '1234-5678',
+            projetos: [
+                { nome: 'Projeto A', status: 'Concluído' },
+                { nome: 'Projeto B', status: 'Em andamento' },
+            ]
+        },
+        2: {
+            email: 'maria@example.com',
+            endereco: 'Rua B, 456',
+            telefone: '2345-6789',
+            projetos: [
+                { nome: 'Projeto C', status: 'Concluído' },
+                { nome: 'Projeto D', status: 'Pendente' },
+            ]
+        },
+        3: {
+            email: 'carlos@example.com',
+            endereco: 'Rua C, 789',
+            telefone: '3456-7890',
+            projetos: [
+                { nome: 'Projeto E', status: 'Em andamento' },
+            ]
+        },
+    };
+
+    rows.forEach(row => {
+        row.addEventListener('click', () => {
+            const id = row.getAttribute('data-id');
+
+            // Limpa a tabela de informações
+            infoTable.innerHTML = `
+                <tr>
+                    <th>Informação</th>
+                    <th>Valor</th>
+                </tr>
+            `;
+            noData.style.display = 'none'; // Esconde mensagem de "sem dados"
+
+            // Preenche a tabela de informações
+            const info = infoData[id];
+            const newRowEmail = document.createElement('tr');
+            newRowEmail.innerHTML = `<td>Email</td><td>${info.email}</td>`;
+            infoTable.appendChild(newRowEmail);
+
+            const newRowEndereco = document.createElement('tr');
+            newRowEndereco.innerHTML = `<td>Endereço</td><td>${info.endereco}</td>`;
+            infoTable.appendChild(newRowEndereco);
+
+            const newRowTelefone = document.createElement('tr');
+            newRowTelefone.innerHTML = `<td>Telefone</td><td>${info.telefone}</td>`;
+            infoTable.appendChild(newRowTelefone);
+
+            // Limpa a tabela de projetos
+            projectsTable.innerHTML = `
+                <tr>
+                    <th>Projeto</th>
+                    <th>Status</th>
+                </tr>
+            `;
+            noProjects.style.display = 'none'; // Esconde mensagem de "sem projetos"
+
+            // Preenche a tabela de projetos
+            info.projetos.forEach(projeto => {
+                const newRowProjeto = document.createElement('tr');
+                newRowProjeto.innerHTML = `<td>${projeto.nome}</td><td>${projeto.status}</td>`;
+                projectsTable.appendChild(newRowProjeto);
+            });
+
+            // Se não houver projetos, exibe mensagem
+            if (info.projetos.length === 0) {
+                noProjects.style.display = '';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+Explicação do Código
+Estrutura de Layout:
+
+A página contém a tabela principal à esquerda e a tabela de detalhes e projetos à direita.
+Cada seção é estilizada para ter bordas e sombras, criando um design limpo e organizado.
+Tabela de Projetos/Atividades:
+
+Adicionamos uma nova tabela chamada projectsTable, que é preenchida com os projetos correspondentes ao usuário selecionado.
+Caso não haja projetos, uma mensagem é exibida.
+JavaScript:
+
+O objeto infoData agora inclui um array de projetos para cada ID.
+Quando uma linha da tabela principal é clicada, as tabelas de informações e projetos são preenchidas adequadamente.
+A lógica para exibir mensagens quando não há dados também foi aplicada à tabela de projetos.

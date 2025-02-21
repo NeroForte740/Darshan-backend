@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela com Modal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .table-container {
+            max-height: 200px; 
+            overflow-y: auto; 
+            border: 1px solid #ddd; 
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe; 
+            margin: 5% auto; 
+            padding: 20px; 
+            border: 1px solid #888; 
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Tabela de Dados</h2>
+
+<div class="table-container">
+    <table id="myTable">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Idade</th>
+        </tr>
+        <tr data-id="1">
+            <td>1</td>
+            <td>João</td>
+            <td>30</td>
+        </tr>
+        <tr data-id="2">
+            <td>2</td>
+            <td>Maria</td>
+            <td>25</td>
+        </tr>
+        <tr data-id="3">
+            <td>3</td>
+            <td>Carlos</td>
+            <td>35</td>
+        </tr>
+    </table>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span id="close" style="cursor:pointer; float:right;">&times;</span>
+        <h3>Detalhes</h3>
+        <table id="modalTable">
+            <tr>
+                <th>Informação</th>
+                <th>Valor</th>
+            </tr>
+            <!-- As linhas da tabela modal serão inseridas aqui -->
+        </table>
+    </div>
+</div>
+
+<script>
+    const rows = document.querySelectorAll('#myTable tr[data-id]');
+    const modal = document.getElementById('myModal');
+    const closeModal = document.getElementById('close');
+    const modalTable = document.getElementById('modalTable');
+
+    // Dados de exemplo para o modal
+    const infoData = {
+        1: [
+            { informacao: 'Email', valor: 'joao@example.com' },
+            { informacao: 'Endereço', valor: 'Rua A, 123' },
+        ],
+        2: [
+            { informacao: 'Email', valor: 'maria@example.com' },
+            { informacao: 'Endereço', valor: 'Rua B, 456' },
+        ],
+        3: [
+            { informacao: 'Email', valor: 'carlos@example.com' },
+            { informacao: 'Endereço', valor: 'Rua C, 789' },
+        ],
+    };
+
+    rows.forEach(row => {
+        row.addEventListener('click', () => {
+            const id = row.getAttribute('data-id');
+
+            // Limpa as linhas existentes na tabela modal
+            modalTable.innerHTML = `
+                <tr>
+                    <th>Informação</th>
+                    <th>Valor</th>
+                </tr>`;
+            
+            // Adiciona as informações do id selecionado
+            infoData[id].forEach(item => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${item.informacao}</td>
+                    <td>${item.valor}</td>`;
+                modalTable.appendChild(newRow);
+            });
+
+            modal.style.display = 'block';
+        });
+    });
+
+    closeModal.onclick = () => {
+        modal.style.display = 'none';
+    };
+
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+</script>
+
+</body>
+</html>
