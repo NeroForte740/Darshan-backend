@@ -1,32 +1,54 @@
-# Darshan
-College's conclusion project for UNIFOR's - SAD - 'Projeto Aplicado 2'
+Sequencia para criar o projeto
+instalar o yarn
 
-Node.js com express
-MVC HTTP REST 
-react.js
+### npm install yarn
 
-Yarn
-  npm install --global yarn
-  yarn --version
-  yarn set version stable
+iniciar o yarn
 
-Nodemon
-  yarn add nodemon -D
--- no arquivo package.json criar um parametro scripts
-  {
-    "scripts":{
-      "dev":"nodemon ./src/server.js"
-    }
-  }
+### npm install yarn
 
-Sucrase
-  yarn add sucrase -D
--- na pasta raiz ( no caso a src ) criar um arquivo "nodemon.js" com os seguintes comandos
-  {
-   "ExecMap": {
-     "js":"sucrase-node"
-     }
-  }
--- para executar entrar com o codigo-terminal
-  npx sucrase-node ./src/server.js
-  
+criar o arquivo package
+
+### yarn add express
+
+instalar o nodemon
+
+### yarn add nodemon -D
+
+criar o script para o package.json
+
+### "scripts":{"dev":"nome do arquivo.js"}
+
+instalar o sucrase
+
+### yarn add sucrase -D
+
+configurando o sucrase
+
+### crie um arquivo chamado nodemon.json "nodemon.json"
+
+### e insira {"execMap":{"js":"sucrase-node"}}
+
+isntale o eslint
+//https://www.youtube.com/watch?v=eieTlMwCwWU
+//https://www.youtube.com/watch?v=ycPl2NUFksg
+
+### yarn add eslint -D
+
+inicie o eslint
+
+### yarn eslint --init
+
+configure o eslint
+-find problems
+-JavaScript
+-none of these
+-no typescript
+-node
+-yes
+-yarn
+
+instale o prettier
+//https://www.youtube.com/watch?v=_fzbg6_-JuE
+
+adicione o editorconfig como ext
