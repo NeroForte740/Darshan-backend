@@ -55,6 +55,15 @@ class ProdutosRepository {
     ]);
     return deleteOp;
   }
+
+  // async supa() {
+  //   try {
+  //     let { data, error } = await supabase.from('produtos').select('*');
+  //     res.send(data);
+  // } catch (error) {
+  //     console.error(error);
+  // }
+  // }
 }
 
 export default new ProdutosRepository();

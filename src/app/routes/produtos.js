@@ -7,6 +7,7 @@ const router = Router();
 // Rotas GET
 router.get("/produtos", ProdutoController.index);
 router.get("/produtos/:id", ProdutoController.show);
+router.get("/produtos/supa", ProdutoController.supa);
 
 // Rotas POST
 router.post("/produtos", ProdutoController.create);

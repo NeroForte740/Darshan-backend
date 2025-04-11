@@ -6,6 +6,9 @@
   "author": "Kelvin da Silva",
   "license": "MIT",
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
     "pg": "^8.13.3",
     "pg-hstore": "^2.3.4"

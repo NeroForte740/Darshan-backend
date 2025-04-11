@@ -1,4 +1,6 @@
 import ProdutoRepository from "../repositories/ProdutosRepository";
+const dotenv = require('dotenv').config();
+const supabase = require('../../config/supabase')
 
 class ProdutoController {
   //listar todos os registros
@@ -83,6 +85,16 @@ class ProdutoController {
 
     res.sendStatus(204);
   }
+
+  async supa(req,res) {
+    try {
+      let { data, error } = await supabase.from('produtos').select('*');
+      res.send(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 }
 
 export default new ProdutoController();
