@@ -1,0 +1,14 @@
+{
+  "pedido": {
+    "description": "Pedido mesa 4",
+    "totalprice": 150.0,
+    "status_preparo": "em preparo",
+    "status_pagamento": "pendente",
+    "client": "João",
+    "priority": "alta"
+  },
+  "produtos": [
+    { "produto_id": "uuid-do-produto-1", "quantidade": 2 },
+    { "produto_id": "uuid-do-produto-2", "quantidade": 1 }
+  ]
+}

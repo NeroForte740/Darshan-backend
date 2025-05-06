@@ -1,0 +1,27 @@
+-- Tabela produtos
+create table produtos (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  price numeric not null,
+  type text,
+  desc text
+);
+
+-- Tabela pedidos
+create table pedidos (
+  id uuid primary key default gen_random_uuid(),
+  description text,
+  totalprice numeric,
+  status_preparo text,
+  status_pagamento text,
+  client text,
+  priority text
+);
+
+-- Tabela de junção
+create table pedido_produto (
+  id uuid primary key default gen_random_uuid(),
+  pedido_id uuid references pedidos(id) on delete cascade,
+  produto_id uuid references produtos(id) on delete cascade,
+  quantidade integer default 1
+);
