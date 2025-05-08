@@ -3,8 +3,9 @@ const cliente = require("../../config/db");
 
 
 class ProdutosModel {
+ 
   async findAll() {
-    const { data, error } = await cliente.supabase.from('produtos').select('*');
+    const { data, error } = await cliente.supabase.from('produtos').select('*').limit('10');
     if (error) throw error;
     return data;
   }

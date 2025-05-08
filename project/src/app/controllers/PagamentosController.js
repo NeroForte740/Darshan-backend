@@ -1,58 +1,54 @@
-const dotenv = require("dotenv").config();
-const cliente = require("../../config/db");
+const PagamentosModel = require("../model/PagamentosModel")
 
 class PagamentosController {
-  // Recupera todos os registros
+
   async index(req, res) {
-    let { data } = await cliente.supabase.from("pagamentos").select("*");
-    return res.send(data);
+    try {
+      const data = await PagamentosModel.findAll();
+      return res.send(data);
+    } catch (error) {
+      return res.status(500).send(error.message);
+    }
   }
-  // Recupera um registro
+
   async show(req, res) {
-    const id = parseInt(req.params.id);
-    let { data } = await cliente.supabase.from("pagamentos").select().eq("pag_id", id);
-    return res.send(data);
+    try {
+      const id = parseInt(req.params.id);
+      const data = await PagamentosModel.findById(id);
+      return res.send(data);
+    } catch (error) {
+      return res.status(500).send(error.message);
+    }
   }
-  // Cria um registro
+
   async create(req, res) {
-    const { id, created_at, name, email, b_date } = req.body;
-    const { data, error } = await cliente.supabase
-      .from("pagamentos")
-      .insert({
-        pag_id: id,
-        pag_value: value,
-        pag_change : change,
-        pag_note: Note,
-        created_at: created_at,
-      })
-      .select();
-    return res.send(data);
+    try {
+      const data = await PagamentosModel.create(req.body);
+      return res.send(data);
+    } catch (error) {
+      return res.status(500).send(error.message);
+    }
   }
-  // Atualiza um registro
+
   async update(req, res) {
-    const id = parseInt(req.params.id);
-    const { created_at, name, email, b_date } = req.body;
-    const { data, error } = await cliente.supabase
-      .from("pagamentos")
-      .update({
-        pag_id: id,
-        pag_value: value,
-        pag_change : change,
-        pag_note: Note,
-        created_at: created_at,
-      })
-      .eq("pag_id", id)
-      .select();
-    return res.send(data);
+    try {
+      const id = parseInt(req.params.id);
+      const data = await PagamentosModel.update(id, req.body);
+      return res.send(data);
+    } catch (error) {
+      return res.status(500).send(error.message);
+    }
   }
-  // Deleta um registro
+
   async destroy(req, res) {
-    const id = parseInt(req.params.id);
-    const response = await cliente.supabase
-      .from("pagamentos")
-      .delete()
-      .eq("pag_id", id);
-    return res.send("Status 201");
+    try {
+      const id = parseInt(req.params.id);
+      await PagamentosModel.delete(id);
+      return res.send("Status 201");
+    } catch (error) {
+      return res.status(500).send(error.message);
+    }
   }
 }
+
 module.exports = new PagamentosController();

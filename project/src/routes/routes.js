@@ -35,11 +35,11 @@ routes.post("/pagamentos/create", pagamentos.create);
 routes.patch("/pagamentos/update/:id", pagamentos.update);
 routes.delete("/pagamentos/destroy/:id", pagamentos.destroy);
 
-//Rotas Usuários
-routes.get("/usuarios", usuarios.index);
-routes.get("/usuarios/show/:id", usuarios.show);
-routes.post("/usuarios/create", usuarios.create);
-routes.patch("/usuarios/update/:id", usuarios.update);
-routes.delete("/usuarios/destroy/:id", usuarios.destroy);
+// //Rotas Usuários
+// routes.get("/usuarios", usuarios.index);
+// routes.get("/usuarios/show/:id", usuarios.show);
+// routes.post("/usuarios/create", usuarios.create);
+// routes.patch("/usuarios/update/:id", usuarios.update);
+// routes.delete("/usuarios/destroy/:id", usuarios.destroy);
 
 module.exports = routes;
