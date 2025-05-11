@@ -1,11 +1,19 @@
 const { Router } = require("express");
 const routes = new Router();
 
+const auth = require("../app/middlewares/auth");
+
+const sessions = require("../app/controllers/SessionsController");
 const produtos = require("../app/controllers/ProdutosController");
 const funcionarios = require("../app/controllers/FuncionariosController");
 const pedidos = require("../app/controllers/PedidosController");
 const pagamentos = require("../app/controllers/PagamentosController");
 const usuarios = require("../app/controllers/Modelo");
+
+//Rota Session
+routes.post("/session", sessions.create);
+
+routes.use(auth);
 
 //Rotas Produtos
 routes.get("/produtos", produtos.index);

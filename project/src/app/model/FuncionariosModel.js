@@ -2,15 +2,27 @@ const dotenv = require("dotenv").config();
 const cliente = require("../../config/db");
 
 class FuncionariosModel {
- 
   async findAll() {
-    const { data, error } = await cliente.supabase.from("funcionarios").select("*");
+    const { data, error } = await cliente.supabase
+      .from("funcionarios")
+      .select("*");
     if (error) throw error;
     return data;
   }
 
   async findById(id) {
-    const { data, error } = await cliente.supabase.from("funcionarios").select().eq("func_id", id);
+    const { data, error } = await cliente.supabase
+      .from("funcionarios")
+      .select()
+      .eq("func_id", id);
+    if (error) throw error;
+    return data;
+  }
+  async findByEmail(email) {
+    const { data, error } = await cliente.supabase
+      .from("funcionarios")
+      .select()
+      .eq("func_email", email);
     if (error) throw error;
     return data;
   }
@@ -45,7 +57,10 @@ class FuncionariosModel {
   }
 
   async delete(id) {
-    const { error } = await cliente.supabase.from("funcionarios").delete().eq("func_id", id);
+    const { error } = await cliente.supabase
+      .from("funcionarios")
+      .delete()
+      .eq("func_id", id);
     if (error) throw error;
     return true;
   }
