@@ -8,7 +8,7 @@ class SessionsController {
     const { email, password } = req.body;
 
     const user = await FuncionariosModel.findByEmail(email);
-    if (!user) {
+    if (user.length === 0) {
       return res.status(401).json({ error: "Funcionario não encontrado" });
     }
 
