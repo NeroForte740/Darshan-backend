@@ -12,6 +12,7 @@ const usuarios = require("../app/controllers/Modelo");
 
 //Rota Session
 routes.post("/session", sessions.create);
+routes.post("/funcionarios/create", funcionarios.create);
 
 routes.use(auth);
 
@@ -25,7 +26,6 @@ routes.delete("/produtos/destroy/:id", produtos.destroy);
 //Rotas Funcionarios
 routes.get("/funcionarios", funcionarios.index);
 routes.get("/funcionarios/show/:id", funcionarios.show);
-routes.post("/funcionarios/create", funcionarios.create);
 routes.patch("/funcionarios/update/:id", funcionarios.update);
 routes.delete("/funcionarios/destroy/:id", funcionarios.destroy);
 
