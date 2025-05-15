@@ -27,6 +27,20 @@ class FuncionariosModel {
     return data;
   }
 
+  async getPassword(email) {
+    const { data, error } = await cliente.supabase
+      .from("funcionarios")
+      .select("func_password")
+      .eq("func_email", email)
+      .single();
+  
+    if (error) {
+      throw new Error(`Erro ao buscar senha: ${error.message}`);
+    }
+  
+    return data.func_password;
+  }
+
   async create({ name, email, password, level }) {
     const { data, error } = await cliente.supabase
       .from("funcionarios")

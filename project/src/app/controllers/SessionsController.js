@@ -9,7 +9,12 @@ class SessionsController {
 
     const user = await FuncionariosModel.findByEmail(email);
     if (user.length === 0) {
-      return res.status(401).json({ error: "Funcionario não encontrado" });
+      return res.status(400).json({ error: "Funcionario não encontrado" });
+    }
+
+    const userPassword = await FuncionariosModel.getPassword(email);
+    if(userPassword !== password){
+      return res.status(400).json({error: "Senha incorreta"})
     }
 
     // if (!(await bcrypt.compare(password, user.func_password))) {
