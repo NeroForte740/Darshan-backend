@@ -110,10 +110,7 @@ class PedidoModel {
   }
 
   async delete(id) {
-      // Opcional: excluir relações manualmente
-      await supabase.from('pedido_produto').delete().eq('pedido_id', id);
-    
-      const { data, error } = await supabase
+      const { data, error } = await cliente.supabase
         .from('pedidos')
         .delete()
         .eq('ped_id', id);
