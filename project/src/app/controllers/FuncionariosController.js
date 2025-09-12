@@ -1,4 +1,4 @@
-const FuncionariosModel = require ('../model/FuncionariosModel');
+const FuncionariosModel = require('../model/FuncionariosModel');
 
 class FuncionariosController {
 
@@ -23,6 +23,11 @@ class FuncionariosController {
 
   async create(req, res) {
     try {
+      const { email } = req.body;
+      const funcionarioExistente = await FuncionariosModel.findByEmail(email);
+      if (funcionarioExistente && funcionarioExistente.length > 0) {
+        return res.status(400).json({ error: "Email já cadastrado" });
+      }
       const data = await FuncionariosModel.create(req.body);
       return res.send(data);
     } catch (error) {

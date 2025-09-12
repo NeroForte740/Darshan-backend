@@ -33,11 +33,11 @@ class FuncionariosModel {
       .select("func_password")
       .eq("func_email", email)
       .single();
-  
+
     if (error) {
       throw new Error(`Erro ao buscar senha: ${error.message}`);
     }
-  
+
     return data.func_password;
   }
 
