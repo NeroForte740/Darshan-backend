@@ -17,7 +17,7 @@ Clone o repositório:
 
 ```bash
 git clone https://github.com/NeroForte740/Darshan-backend.git
-cd DevAmbient1
+cd Darshan-backend
 
 Instale as dependências:
 
@@ -68,3 +68,4 @@ project/
 📜 Licença
 
 MIT
+
