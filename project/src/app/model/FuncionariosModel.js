@@ -33,11 +33,19 @@ class FuncionariosModel {
       .select("func_password")
       .eq("func_email", email)
       .single();
+<<<<<<< HEAD
 
     if (error) {
       throw new Error(`Erro ao buscar senha: ${error.message}`);
     }
 
+=======
+  
+    if (error) {
+      throw new Error(`Erro ao buscar senha: ${error.message}`);
+    }
+  
+>>>>>>> ed6599a5ab50bb678e5e5d82301fa5283fc1ef31
     return data.func_password;
   }
 

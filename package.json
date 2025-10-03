@@ -8,20 +8,31 @@
   "license": "MIT",
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
+<<<<<<< HEAD
     "@testing-library/react-native": "^13.3.3",
+=======
+>>>>>>> ed6599a5ab50bb678e5e5d82301fa5283fc1ef31
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+<<<<<<< HEAD
     "jsonwebtoken": "^9.0.2",
     "supertest": "^7.1.4"
+=======
+    "jsonwebtoken": "^9.0.2"
+>>>>>>> ed6599a5ab50bb678e5e5d82301fa5283fc1ef31
   },
   "devDependencies": {
     "nodemon": "^3.1.9",
     "yarn": "^1.22.22"
   },
   "scripts": {
+<<<<<<< HEAD
     "dev": "nodemon ./project/src/server.js",
     "test": "jest"
+=======
+    "dev": "nodemon ./project/src/server.js"
+>>>>>>> ed6599a5ab50bb678e5e5d82301fa5283fc1ef31
   }
 }

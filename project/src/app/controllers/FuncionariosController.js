@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const FuncionariosModel = require('../model/FuncionariosModel');
+=======
+const FuncionariosModel = require ('../model/FuncionariosModel');
+>>>>>>> ed6599a5ab50bb678e5e5d82301fa5283fc1ef31
 
 class FuncionariosController {
 
@@ -23,11 +27,14 @@ class FuncionariosController {
 
   async create(req, res) {
     try {
+<<<<<<< HEAD
       const { email } = req.body;
       const funcionarioExistente = await FuncionariosModel.findByEmail(email);
       if (funcionarioExistente && funcionarioExistente.length > 0) {
         return res.status(400).json({ error: "Email já cadastrado" });
       }
+=======
+>>>>>>> ed6599a5ab50bb678e5e5d82301fa5283fc1ef31
       const data = await FuncionariosModel.create(req.body);
       return res.send(data);
     } catch (error) {
