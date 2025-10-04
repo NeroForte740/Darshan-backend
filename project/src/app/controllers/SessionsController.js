@@ -13,13 +13,8 @@ class SessionsController {
     }
 
     const userPassword = await FuncionariosModel.getPassword(email);
-<<<<<<< HEAD
     if (userPassword !== password) {
       return res.status(400).json({ error: "Senha incorreta" })
-=======
-    if(userPassword !== password){
-      return res.status(400).json({error: "Senha incorreta"})
->>>>>>> ed6599a5ab50bb678e5e5d82301fa5283fc1ef31
     }
 
     // if (!(await bcrypt.compare(password, user.func_password))) {
