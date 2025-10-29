@@ -86,6 +86,7 @@ class PedidoModel {
         ped_status_pag: status_pag,
         ped_client: client,
         ped_priori: priority,
+        updated_at: new Date().toISOString(),
       })
       .eq("ped_id", id)
       .select()
