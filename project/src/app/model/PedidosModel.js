@@ -20,7 +20,6 @@ class PedidoModel {
       }
 
       if (!data || data.length === 0) {
-        console.log("Nenhum pedido encontrado.");
         return [];
       }
 
@@ -30,7 +29,6 @@ class PedidoModel {
         return dataB - dataA; // pedidos mais recentes primeiro
       });
 
-      console.log("Pedidos ordenados:", pedidosOrdenados);
       return pedidosOrdenados;
     } catch (err) {
       console.error("Erro ao buscar pedidos:", err.message || err);
