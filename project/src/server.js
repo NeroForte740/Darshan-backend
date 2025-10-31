@@ -5,4 +5,4 @@ const port = process.env.PORT || 3001;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-app.listen(port, console.log(`http://localhost:${port}/produtos`));
+app.listen(port, '0.0.0.0', console.log(`http://localhost:${port}/produtos`));

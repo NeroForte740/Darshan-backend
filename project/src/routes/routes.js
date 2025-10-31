@@ -40,7 +40,7 @@ routes.delete("/pedidos/destroy/:id", pedidos.destroy);
 //Rotas finalizados
 routes.get("/finalizados", finalizados.index);
 routes.get("/finalizados/show/:id", finalizados.show);
-routes.post("/finalizados/create", finalizados.create);
+routes.post("/finalizados/create/:id", finalizados.create);
 routes.patch("/finalizados/update/:id", finalizados.update);
 routes.delete("/finalizados/destroy/:id", finalizados.destroy);
 

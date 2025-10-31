@@ -35,11 +35,9 @@ class PedidoModel {
   async create(pedido) {
     const {
       description,
-      totalprice,
       status_preparo,
       status_pag,
       client,
-      priority,
     } = pedido;
 
     // Cria o pedido
@@ -48,11 +46,9 @@ class PedidoModel {
       .insert([
         {
           ped_description: description,
-          ped_totalprice: totalprice,
           ped_status_preparo: status_preparo,
           ped_status_pag: status_pag,
           ped_client: client,
-          ped_priori: priority,
         },
       ])
       .select()
@@ -70,22 +66,18 @@ class PedidoModel {
     // Atualiza os dados do pedido
     const {
       description,
-      totalprice,
       status_preparo,
       status_pag,
       client,
-      priority,
     } = pedido;
 
     const { data: updatedPedido, error: pedidoError } = await cliente.supabase
       .from("pedidos")
       .update({
         ped_description: description,
-        ped_totalprice: totalprice,
         ped_status_preparo: status_preparo,
         ped_status_pag: status_pag,
         ped_client: client,
-        ped_priori: priority,
         updated_at: new Date().toISOString(),
       })
       .eq("ped_id", id)

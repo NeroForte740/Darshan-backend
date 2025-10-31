@@ -1,6 +1,6 @@
 const FinalizadosModel = require("../model/FinalizadosModel");
 
-class PedidosController {
+class FinalizadosController {
   async index(req, res) {
     try {
       const finalizados = await FinalizadosModel.findAll();
@@ -21,11 +21,19 @@ class PedidosController {
 
   async create(req, res) {
     try {
-      const finalizados = req.body;
-      const newPedido = await FinalizadosModel.create(finalizados);
-      res.status(201).json(newPedido);
+      const id = req.params.id;
+      if (!id) {
+        return res.status(400).json({ message: "ID do pedido não fornecido" });
+      }
+      
+      const pedidoFinalizado = await FinalizadosModel.create(id);
+      res.status(201).json(pedidoFinalizado);
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      console.error("Erro ao finalizar pedido:", error);
+      res.status(400).json({ 
+        message: "Erro ao finalizar pedido", 
+        error: error.message 
+      });
     }
   }
 
@@ -51,4 +59,4 @@ class PedidosController {
   }
 }
 
-module.exports = new PedidosController();
+module.exports = new FinalizadosController();
