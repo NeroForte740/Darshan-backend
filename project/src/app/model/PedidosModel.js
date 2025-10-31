@@ -2,17 +2,42 @@ const dotenv = require("dotenv").config();
 const cliente = require("../../config/db");
 
 class PedidoModel {
+
   async findAll() {
-    const { data, error } = await cliente.supabase.from("pedidos").select(`
+    try {
+      const { data, error } = await cliente.supabase
+        .from("pedidos")
+        .select(`
         *,
         pedido_produto (
           quantidade,
           produtos (*)
         )
       `);
-    if (error) throw error;
-    return data;
+
+      if (error) {
+        throw error; // joga o erro para o catch
+      }
+
+      if (!data || data.length === 0) {
+        console.log("Nenhum pedido encontrado.");
+        return [];
+      }
+
+      const pedidosOrdenados = data.sort((a, b) => {
+        const dataA = new Date(a.updated_at ?? a.created_at);
+        const dataB = new Date(b.updated_at ?? b.created_at);
+        return dataB - dataA; // pedidos mais recentes primeiro
+      });
+
+      console.log("Pedidos ordenados:", pedidosOrdenados);
+      return pedidosOrdenados;
+    } catch (err) {
+      console.error("Erro ao buscar pedidos:", err.message || err);
+      return [];
+    }
   }
+
 
   async findById(id) {
     const { data, error } = await cliente.supabase
@@ -33,6 +58,8 @@ class PedidoModel {
   }
 
   async create(pedido) {
+    const agoraUTC = new Date().toISOString();
+
     const {
       description,
       status_preparo,
@@ -49,6 +76,7 @@ class PedidoModel {
           ped_status_preparo: status_preparo,
           ped_status_pag: status_pag,
           ped_client: client,
+          updated_at: agoraUTC,
         },
       ])
       .select()
@@ -60,6 +88,8 @@ class PedidoModel {
   }
 
   async update(id, pedido) {
+    const agoraUTC = new Date().toISOString();
+
     if (!pedido) {
       throw new Error("O objeto 'pedido' não foi fornecido.");
     }
@@ -78,7 +108,7 @@ class PedidoModel {
         ped_status_preparo: status_preparo,
         ped_status_pag: status_pag,
         ped_client: client,
-        updated_at: new Date().toISOString(),
+        updated_at: agoraUTC,
       })
       .eq("ped_id", id)
       .select()
